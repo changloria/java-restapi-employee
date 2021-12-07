@@ -1,5 +1,7 @@
 package com.afs.restapi;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -48,5 +50,15 @@ public class CompanyRepository {
                 .skip((long) (page-1) * pageSize)
                 .limit(pageSize)
                 .collect(Collectors.toList());
+    }
+
+    public Company create(Company company) {
+        Integer nextId = companies.stream()
+                .mapToInt(Company::getId)
+                .max()
+                .orElse(0) + 1;
+        company.setId(nextId);
+        companies.add(company);
+        return company;
     }
 }
