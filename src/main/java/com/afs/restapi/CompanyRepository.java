@@ -42,4 +42,11 @@ public class CompanyRepository {
                 .orElseThrow(NoMatchIDFoundException::new)
                 .getEmployees();
     }
+
+    public List<Company> findByPage(Integer page, Integer pageSize) {
+        return companies.stream()
+                .skip((long) (page-1) * pageSize)
+                .limit(pageSize)
+                .collect(Collectors.toList());
+    }
 }
