@@ -40,4 +40,10 @@ public class CompanyController {
     public Company createNewCompany(@RequestBody Company company){
         return companyRepository.create(company);
     }
+
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public Company deleteCompany(@PathVariable Integer id) {
+        return companyRepository.delete(id);
+    }
 }
