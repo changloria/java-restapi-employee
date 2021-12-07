@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class CompanyRepository {
@@ -33,5 +34,12 @@ public class CompanyRepository {
         return companies.stream().filter(company -> company.getId().equals(id))
                 .findFirst()
                 .orElseThrow(NoMatchIDFoundException::new);
+    }
+
+    public List<Employee> findEmployeesByCompanyId(int id) {
+        return companies.stream().filter(company -> company.getId().equals(id))
+                .findFirst()
+                .orElseThrow(NoMatchIDFoundException::new)
+                .getEmployees();
     }
 }
