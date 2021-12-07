@@ -46,4 +46,17 @@ public class CompanyController {
     public Company deleteCompany(@PathVariable Integer id) {
         return companyRepository.delete(id);
     }
+
+    @PutMapping("/{id}")
+    public Company editCompany(@PathVariable Integer id, @RequestBody Company updatedCompany) {
+        Company company = companyRepository.findById(id);
+
+        if(updatedCompany.getEmployees() != null)
+            company.setEmployees(updatedCompany.getEmployees());
+
+        if(updatedCompany.getCompanyName() != null)
+            company.setCompanyName(updatedCompany.getCompanyName());
+
+        return companyRepository.save(id, company);
+    }
 }

@@ -65,4 +65,11 @@ public class CompanyRepository {
     public Company delete(Integer id) {
         return null;
     }
+
+    public Company save(Integer id, Company updatedCompany) {
+        Company company = findById(id);
+        companies.remove(company);
+        companies.add(updatedCompany);
+        return updatedCompany;
+    }
 }
