@@ -1,7 +1,5 @@
 package com.afs.restapi;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,7 +9,7 @@ import java.util.stream.Collectors;
 @Repository
 public class CompanyRepository {
     private List<Company> companies = new ArrayList<>();
-
+    
     public CompanyRepository() {
         List<Employee> employeeListinCompany1 = new ArrayList<>();
         employeeListinCompany1.add(new Employee(1, "Mary", 23, "Female", 20000));
@@ -62,8 +60,9 @@ public class CompanyRepository {
         return company;
     }
 
-    public Company delete(Integer id) {
-        return null;
+    public void delete(Integer id) {
+        Company company = findById(id);
+        companies.remove(company);
     }
 
     public Company save(Integer id, Company updatedCompany) {
